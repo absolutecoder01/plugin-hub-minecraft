@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+env/
+
+# Node/React
+node_modules/
+dist/
+.vite/
+
+# Environment & Secrets
+.env
+*.key
+*.pem
+
+# Local data
+*.sqlite-journal
+static/uploads/
+
+# IDE
+.vscode/
+.idea/
+.DS_Store
+.zed/
