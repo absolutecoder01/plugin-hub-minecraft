@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Home</title>
+        <link
+            rel="stylesheet"
+            href="{{url_for('static', filename='css/add_plugin.css')}}"
+        />
+    </head>
+    <body>
+        <h1>Edit plugin</h1>
+        <form method="POST" action="/edit_plugin">
+            <input placeholder="title" name="plugin_name" />
+            <textarea placeholder="description" name="plugin_description">
+            </textarea>
+            <button type="submit"><a>Save</a></button>
+        </form>
+        <a href="/"><button class="cancel-btn">Cancel</button></a>
+    </body>
+</html>

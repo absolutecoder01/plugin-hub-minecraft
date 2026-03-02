@@ -1,0 +1,7 @@
+div {
+    border: 1px solid black;
+    color: limegreen;
+    max-width: 200px;
+    max-height: 150px;
+    display: inline-block;
+}
