@@ -8,6 +8,14 @@
         />
     </head>
     <body>
+        {% with messages = get_flashed_messages() %} {% if messages %}
+        <ul class="flashes">
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %} {% endwith %}
+
         <!--Greetings for person that opened panel-->
         <h1>Welcome to plugin-hub</h1>
 
@@ -22,9 +30,10 @@
         <div>
             <h3>{{ plugin.name }}</h3>
             <p>{{ plugin.description }}</p>
-            <a href="url_for('edit_plugin', plugin_id=plugin_id)"
+            <a href="{{ url_for('edit_plugin', plugin_id=plugin.id) }}"
                 ><button>Edit</button></a
             >
+            <a href="/delete/{{ plugin.id }}"><button>Remove</button></a>
         </div>
         {% endfor %} {% else %} {% endif %}
     </body>

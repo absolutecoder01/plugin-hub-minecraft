@@ -30,13 +30,35 @@ def add_plugin():
 
 
 @app.route("/edit_plugin/<int:plugin_id>", methods=["GET", "POST"])
-def edit_plugin():
-    if request.method == "POST":
-        new_plugin_name = request.form.get("new_plugin_name")
-        new_plugin_description = request.form.get("new_plugin_description")
-        # TODO: Editing plugin data within code, find a way to identify which plugin it is and set new data using plugin.editPlugn(newName, newDescription), in Plugin class already desclared an id.
+def edit_plugin(plugin_id):
+    if request.method == "GET":
+        found_plugin = None
+        for plugin in plugins:
+            found_plugin = plugin
+            if plugin.id == plugin_id:
+                return render_template("edit_plugin.html", plugin=found_plugin)
+                break
+
+    elif request.method == "POST":
+        new_plugin_name = request.form.get("plugin_name")
+        new_plugin_description = request.form.get("plugin_description")
+        for plugin in plugins:
+            if plugin.id == plugin_id:
+                plugin.editPlugin(new_plugin_name, new_plugin_description)
+                return redirect("/")
+                break
 
     return render_template("edit_plugin.html", plugin=plugin)
+
+
+@app.route("/delete/<int:plugin_id>", methods=["GET"])
+def delete_plugin(plugin_id):
+    if request.method == "GET":
+        for plugin in plugins:
+            if plugin.id == plugin_id:
+                plugins.remove(plugin)
+                return redirect("/")
+                break
 
 
 # Should be enabled when fixing bugs

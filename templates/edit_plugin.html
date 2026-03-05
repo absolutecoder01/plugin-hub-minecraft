@@ -9,11 +9,16 @@
     </head>
     <body>
         <h1>Edit plugin</h1>
-        <form method="POST" action="/edit_plugin">
-            <input placeholder="title" name="plugin_name" />
+        <form method="POST" action="/edit_plugin/{{ plugin.id }}">
+            <input
+                placeholder="title"
+                name="plugin_name"
+                value="{{ plugin.name }}"
+            />
             <textarea placeholder="description" name="plugin_description">
+                {{ plugin.description }}
             </textarea>
-            <button type="submit"><a>Save</a></button>
+            <button type="submit">Save</button>
         </form>
         <a href="/"><button class="cancel-btn">Cancel</button></a>
     </body>
