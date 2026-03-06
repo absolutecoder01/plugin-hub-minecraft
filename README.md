@@ -6,8 +6,6 @@ A personal Minecraft plugin library with a game-style interface. Store, organize
 - Adding thumbnails and descriptions
 - Minecraft-style interface
 - Local hosting – full control over your data
-- Access security
-- Access from any device on your local network
 
 ## Why?
 ~~*because everyone deserves their own, well-organized plugin collection – no cloud, no subscriptions, 100% privacy.*~~
