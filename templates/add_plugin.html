@@ -9,11 +9,18 @@
     </head>
     <body>
         <h1>Add new plugin</h1>
-        <form method="POST" action="/add_plugin">
+        <form method="POST" action="/add_plugin" enctype="multipart/form-data">
+            <label>Plugin name: </label>
             <input placeholder="title" name="plugin_name" />
+            <label>Plugin description: </label>
             <textarea placeholder="description" name="plugin_description">
             </textarea>
-            <button type="submit"><a>Add</a></button>
+            <label>Plugin file: </label>
+            <input type="file" name="plugin_file" />
+            <label>Plugin image: </label>
+            <input type="file" name="plugin_image" />
+
+            <button type="submit">Add</button>
         </form>
         <a href="/"><button class="cancel-btn">Cancel</button></a>
     </body>

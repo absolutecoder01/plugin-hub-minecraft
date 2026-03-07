@@ -1,12 +1,13 @@
-class Plugin:
-    unique_id = 0
+from flask_sqlalchemy import SQLAlchemy
 
-    def __init__(self, name, description):
-        self.id = Plugin.unique_id
-        self.name = name
-        self.description = description
-        Plugin.unique_id += 1
+db = SQLAlchemy()
 
-    def editPlugin(self, new_name, new_description):
-        self.name = new_name
-        self.description = new_description
+
+class Plugin(db.Model):
+    __tablename__ = "plugin"
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100))
+    description = db.Column(db.Text)
+    file_filename = db.Column(db.String(255))
+    image_filename = db.Column(db.String(255))

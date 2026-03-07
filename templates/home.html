@@ -33,7 +33,16 @@
             <a href="{{ url_for('edit_plugin', plugin_id=plugin.id) }}"
                 ><button>Edit</button></a
             >
-            <a href="/delete/{{ plugin.id }}"><button>Remove</button></a>
+            <form
+                method="POST"
+                action="/delete/{{ plugin.id }}"
+                style="display: inline"
+                onsubmit="
+                    return confirm('Czy na pewno chcesz usunąć ten plugin?');
+                "
+            >
+                <button type="submit">Remove</button>
+            </form>
         </div>
         {% endfor %} {% else %} {% endif %}
     </body>
