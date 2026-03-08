@@ -67,14 +67,15 @@ python3 app.py
 
 ### Add plugin page
 
-
-<img width="1677" height="899" alt="add_plugin" src="https://github.com/user-attachments/assets/7d96a439-2ce6-471e-9cdb-3dbf9ef87cbb" />
+<img width="1677" height="899" alt="Screenshot 2026-03-08 at 19 00 53" src="https://github.com/user-attachments/assets/b56cfbfd-972f-4c35-8747-75422384a14c" />
 
 
 
 ### Edit plugin page
 
-<img width="1677" height="899" alt="edit_plugin" src="https://github.com/user-attachments/assets/c325017c-fe5f-4e08-9e4d-295bf780337d" />
+
+<img width="1677" height="899" alt="d" src="https://github.com/user-attachments/assets/d575f145-1971-4865-9b90-7f05ce24c476" />
+
 
 
 ### Home page after adding bunch of plugins
