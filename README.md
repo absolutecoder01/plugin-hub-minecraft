@@ -35,6 +35,10 @@ pip3 install -r requirements.txt
 ```bash
 python3 app.py
 ```
+5. Open in your browser:
+```bash
+http://127.0.0.1:5000/
+```
 ## Usage
 
 1. Click **"Add Plugin"** to upload a new plugin (`.jar` or `.zip`)
