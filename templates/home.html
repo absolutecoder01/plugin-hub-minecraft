@@ -1,49 +1,70 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <title>Home</title>
+        <title>Plugin Hub</title>
+        <link
+            rel="stylesheet"
+            href="{{url_for('static', filename='css/minecraft.css')}}"
+        />
         <link
             rel="stylesheet"
             href="{{url_for('static', filename='css/home.css')}}"
         />
     </head>
     <body>
-        {% with messages = get_flashed_messages() %} {% if messages %}
-        <ul class="flashes">
-            {% for message in messages %}
-            <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %} {% endwith %}
+        <div class="panel">
+            {% with messages = get_flashed_messages() %} {% if messages %}
+            <ul class="flashes">
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %} {% endwith %}
 
-        <!--Greetings for person that opened panel-->
-        <h1>Welcome to plugin-hub</h1>
+            <h1 class="text-shadow-md markdown">Welcome to plugin-hub</h1>
 
-        <!--Add more plugin button-->
-        <div>
-            <a href="{{ url_for('add_plugin') }}">
-                <button>Add plugin +</button>
-            </a>
+            <div>
+                <a href="{{ url_for('add_plugin') }}">
+                    <button class="button">Add plugin +</button>
+                </a>
+            </div>
+
+            {% if plugins %} {% for plugin in plugins %}
+            <div class="raised-slot">
+                {% if plugin.image_filename %}
+                <img
+                    src="{{ url_for('static', filename=plugin.image_filename.replace('static/', '')) }}"
+                />
+                <div class="no-image" style="display: none">?</div>
+                {% else %}
+                <div class="no-image">?</div>
+                {% endif %}
+
+                <div class="plugin-content">
+                    <h3>{{ plugin.name }}</h3>
+                    <p>{{ plugin.description }}</p>
+                </div>
+
+                <a href="{{ url_for('edit_plugin', plugin_id=plugin.id) }}">
+                    <button class="button">Edit</button>
+                </a>
+
+                <form
+                    method="POST"
+                    action="/delete/{{ plugin.id }}"
+                    style="display: inline"
+                    onsubmit="
+                        return confirm(
+                            'Czy na pewno chcesz usunąć ten plugin?',
+                        );
+                    "
+                >
+                    <button type="submit" class="button">Remove</button>
+                </form>
+            </div>
+            {% endfor %} {% else %}
+            <p>No plugins yet. Click "Add plugin +" to get started!</p>
+            {% endif %}
         </div>
-        <!--List of plugins that are added displayed-->
-        {% if plugins %} {% for plugin in plugins %}
-        <div>
-            <h3>{{ plugin.name }}</h3>
-            <p>{{ plugin.description }}</p>
-            <a href="{{ url_for('edit_plugin', plugin_id=plugin.id) }}"
-                ><button>Edit</button></a
-            >
-            <form
-                method="POST"
-                action="/delete/{{ plugin.id }}"
-                style="display: inline"
-                onsubmit="
-                    return confirm('Czy na pewno chcesz usunąć ten plugin?');
-                "
-            >
-                <button type="submit">Remove</button>
-            </form>
-        </div>
-        {% endfor %} {% else %} {% endif %}
     </body>
 </html>

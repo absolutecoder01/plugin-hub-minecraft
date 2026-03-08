@@ -1,34 +1,123 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <title>Home</title>
+        <title>Edit Plugin</title>
+        <link
+            rel="stylesheet"
+            href="{{url_for('static', filename='css/minecraft.css')}}"
+        />
         <link
             rel="stylesheet"
             href="{{url_for('static', filename='css/add_plugin.css')}}"
         />
     </head>
     <body>
-        <h1>Edit plugin</h1>
-        <form
-            method="POST"
-            action="/edit_plugin/{{ plugin.id }}"
-            enctype="multipart/form-data"
-        >
-            <input
-                placeholder="title"
-                name="plugin_name"
-                value="{{ plugin.name }}"
-            />
-            <textarea placeholder="description" name="plugin_description">
-                {{ plugin.description }}
-            </textarea>
-            <label>Plugin file: {{ plugin.file_filename }}</label>
-            <input type="file" name="plugin_file" />
-            <label>Plugin image: {{ plugin.image_filename }}</label>
-            <input type="file" name="plugin_image" />
+        <div class="panel">
+            <h1 class="text-shadow-md">Edit plugin</h1>
+            <form
+                method="POST"
+                action="/edit_plugin/{{ plugin.id }}"
+                enctype="multipart/form-data"
+            >
+                <div class="form-group">
+                    <label>Plugin name:</label>
+                    <input
+                        type="text"
+                        placeholder="Enter plugin name"
+                        name="plugin_name"
+                        value="{{ plugin.name }}"
+                        required
+                    />
+                </div>
 
-            <button type="submit">Save</button>
-        </form>
-        <a href="/"><button class="cancel-btn">Cancel</button></a>
+                <div class="form-group">
+                    <label>Plugin description:</label>
+                    <textarea
+                        placeholder="Enter plugin description"
+                        name="plugin_description"
+                        required
+                    >
+{{ plugin.description }}</textarea
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label>Current plugin file:</label>
+                    <div class="file-info">
+                        {{ plugin.file_filename or 'No file uploaded' }}
+                    </div>
+                    <input type="file" name="plugin_file" accept=".jar,.zip" />
+                </div>
+
+                <div class="form-group">
+                    <label>Plugin image:</label>
+                    {% if plugin.image_filename %}
+                    <div class="file-info">
+                        Current: {{ plugin.image_filename }}
+                    </div>
+                    {% else %}
+                    <div class="file-info">No image uploaded yet</div>
+                    {% endif %}
+                    <input
+                        type="file"
+                        name="plugin_image"
+                        accept="image/*"
+                        id="image_input"
+                    />
+                    <div
+                        class="image-preview {% if plugin.image_filename %}has-image{% endif %}"
+                        id="image_preview"
+                    >
+                        {% if plugin.image_filename %}
+                        <img
+                            src="{{ url_for('static', filename='uploads/' + plugin.image_filename) }}"
+                            alt="Current image"
+                            onerror="
+                                this.style.display = 'none';
+                                this.parentElement.innerHTML =
+                                    '<div class=\'placeholder\'>?</div>';
+                            "
+                        />
+                        {% else %}
+                        <div class="placeholder">?</div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="button">Save Changes</button>
+                    <a href="/"
+                        ><button type="button" class="cancel-btn">
+                            Cancel
+                        </button></a
+                    >
+                </div>
+            </form>
+        </div>
+
+        <script>
+            const imageInput = document.getElementById("image_input");
+            const imagePreview = document.getElementById("image_preview");
+
+            if (imageInput) {
+                imageInput.addEventListener("change", function (e) {
+                    const file = e.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function (e) {
+                            imagePreview.innerHTML = "";
+
+                            const img = document.createElement("img");
+                            img.src = e.target.result;
+                            img.alt = "New preview";
+                            imagePreview.appendChild(img);
+
+                            imagePreview.classList.add("has-image");
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+            }
+        </script>
     </body>
 </html>

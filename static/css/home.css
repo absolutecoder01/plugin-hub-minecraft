@@ -1,7 +1,377 @@
-div {
-    border: 1px solid black;
-    color: limegreen;
-    max-width: 200px;
-    max-height: 150px;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Minecraft", monospace;
+    background-color: #1a1a1a;
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)),
+        url("../imgs/home-background.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background: radial-gradient(
+        ellipse at center,
+        transparent 0%,
+        rgba(0, 0, 0, 0.4) 100%
+    );
+    z-index: 0;
+}
+
+.panel {
+    width: 90%;
+    max-width: 950px;
+    min-height: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 40px;
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(135deg, #c6c6c6 0%, #a8a8a8 100%);
+    border: 4px solid #000;
+    box-shadow:
+        inset 4px 4px 0px #ffffff,
+        inset -4px -4px 0px #555555,
+        0 0 30px rgba(0, 0, 0, 0.8);
+    image-rendering: pixelated;
+}
+
+h1 {
+    font-family: "Minecraft";
+    font-weight: bold;
+    color: #ffffff;
+    font-size: 2.8rem;
+    margin-bottom: 35px;
+    text-align: center;
+    text-shadow:
+        4px 4px 0px #000,
+        -2px -2px 0px #555;
+    letter-spacing: 3px;
+    position: relative;
+    animation: titlePulse 3s ease-in-out infinite;
+}
+
+@keyframes titlePulse {
+    0%,
+    100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.02);
+    }
+}
+
+.flashes {
+    list-style: none;
+    margin-bottom: 25px;
+    padding: 0;
+}
+
+.flashes li {
+    padding: 15px 20px;
+    margin-bottom: 12px;
+    text-shadow: 2px 2px #000;
+    border: 3px solid #000;
+    image-rendering: pixelated;
+    font-weight: bold;
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.flashes li:nth-child(4n + 1) {
+    background: linear-gradient(135deg, #55ff55 0%, #3d8f3d 100%);
+    color: #000;
+}
+
+.flashes li:nth-child(4n + 2) {
+    background: linear-gradient(135deg, #ffaa00 0%, #cc8800 100%);
+    color: #000;
+}
+
+.flashes li:nth-child(4n + 3) {
+    background: linear-gradient(135deg, #55ffff 0%, #3d9999 100%);
+    color: #000;
+}
+
+.flashes li:nth-child(4n + 4) {
+    background: linear-gradient(135deg, #ff5555 0%, #cc3d3d 100%);
+    color: #fff;
+}
+
+div:has(.button) {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 20px;
+    background: linear-gradient(
+        135deg,
+        rgba(85, 255, 85, 0.2) 0%,
+        rgba(0, 150, 0, 0.2) 100%
+    );
+    border: 3px solid #000;
+    border-radius: 0;
+}
+
+.button {
+    font-family: "Minecraft";
+    font-weight: bold;
+    font-size: 1.4rem;
+    padding: 15px 40px;
+    margin: 10px;
+    cursor: pointer;
+    background: linear-gradient(135deg, #7c7c7c 0%, #585858 100%);
+    border: 4px solid #000;
+    color: #ffffff;
+    text-shadow: 3px 3px #000;
+    box-shadow:
+        inset 3px 3px 0px #a8a8a8,
+        inset -3px -3px 0px #3d3d3d,
+        0 4px 0px #000;
+    transition: all 0.1s;
+    image-rendering: pixelated;
+    position: relative;
+    top: 0;
+}
+
+.button:hover {
+    background: linear-gradient(135deg, #949494 0%, #707070 100%);
+    box-shadow:
+        inset 4px 4px 0px #c6c6c6,
+        inset -4px -4px 0px #555555,
+        0 5px 0px #000;
+    top: -1px;
+    color: #ffff55;
+}
+
+.button:active {
+    top: 3px;
+    box-shadow:
+        inset 3px 3px 0px #3d3d3d,
+        inset -3px -3px 0px #a8a8a8,
+        0 1px 0px #000;
+}
+
+.raised-slot {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    padding: 25px;
+    margin-bottom: 25px;
+    border: 4px solid #000;
+    image-rendering: pixelated;
+    position: relative;
+    transition: all 0.2s;
+    box-shadow:
+        inset 3px 3px 0px rgba(255, 255, 255, 0.5),
+        inset -3px -3px 0px rgba(0, 0, 0, 0.3),
+        0 4px 0px rgba(0, 0, 0, 0.5);
+}
+
+.raised-slot:nth-child(4n + 3) {
+    background: linear-gradient(135deg, #8b7355 0%, #6b5344 100%);
+}
+
+.raised-slot:nth-child(4n + 4) {
+    background: linear-gradient(135deg, #556b8b 0%, #44536b 100%);
+}
+
+.raised-slot:nth-child(4n + 5) {
+    background: linear-gradient(135deg, #558b6b 0%, #446b53 100%);
+}
+
+.raised-slot:nth-child(4n + 6) {
+    background: linear-gradient(135deg, #8b5573 0%, #6b4459 100%);
+}
+
+.raised-slot:hover {
+    transform: scale(1.02) translateX(5px);
+    box-shadow:
+        inset 4px 4px 0px rgba(255, 255, 255, 0.6),
+        inset -4px -4px 0px rgba(0, 0, 0, 0.4),
+        0 6px 0px rgba(0, 0, 0, 0.6);
+    z-index: 10;
+}
+
+.raised-slot img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border: 4px solid #000;
+    image-rendering: pixelated;
+    background-color: #2d2d2d;
+    flex-shrink: 0;
+    box-shadow:
+        inset 2px 2px 0px rgba(255, 255, 255, 0.3),
+        inset -2px -2px 0px rgba(0, 0, 0, 0.5),
+        3px 3px 0px rgba(0, 0, 0, 0.5);
+}
+
+.raised-slot .no-image {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, #3d3d3d 0%, #2d2d2d 100%);
+    border: 4px solid #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    font-size: 3rem;
+    flex-shrink: 0;
+    box-shadow:
+        inset 2px 2px 0px rgba(255, 255, 255, 0.2),
+        inset -2px -2px 0px rgba(0, 0, 0, 0.5);
+}
+
+.raised-slot .plugin-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.raised-slot h3 {
+    color: #55ff55;
+    font-size: 1.8rem;
+    margin-bottom: 12px;
+    text-shadow: 3px 3px #000;
+    word-break: break-word;
+    letter-spacing: 1px;
+}
+
+.raised-slot:nth-child(4n + 3) h3 {
+    color: #ffaa55;
+}
+.raised-slot:nth-child(4n + 4) h3 {
+    color: #55ffff;
+}
+.raised-slot:nth-child(4n + 5) h3 {
+    color: #ff55ff;
+}
+
+.raised-slot p {
+    color: #ffffff;
+    font-size: 1.1rem;
+    text-shadow: 2px 2px #000;
+    line-height: 1.6;
+    word-break: break-word;
+    opacity: 0.95;
+}
+
+.raised-slot form,
+.raised-slot a {
     display: inline-block;
+    margin-left: 15px;
+}
+
+.raised-slot .button {
+    font-size: 1rem;
+    padding: 10px 20px;
+}
+
+.raised-slot a .button {
+    background: linear-gradient(135deg, #5599ff 0%, #3d7acc 100%);
+}
+
+.raised-slot a .button:hover {
+    background: linear-gradient(135deg, #77b3ff 0%, #5599ff 100%);
+    color: #fff;
+}
+
+.raised-slot form .button {
+    background: linear-gradient(135deg, #ff5555 0%, #cc3d3d 100%);
+}
+
+.raised-slot form .button:hover {
+    background: linear-gradient(135deg, #ff7777 0%, #ff5555 100%);
+    color: #fff;
+}
+
+.panel::-webkit-scrollbar {
+    width: 16px;
+}
+
+.panel::-webkit-scrollbar-track {
+    background: #555;
+    border: 3px solid #000;
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.panel::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #8b8b8b 0%, #6b6b6b 100%);
+    border: 3px solid #000;
+    box-shadow: inset 2px 2px 5px rgba(255, 255, 255, 0.3);
+}
+
+.panel::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #a8a8a8 0%, #8b8b8b 100%);
+}
+
+.panel > p {
+    text-align: center;
+    color: #ffffff;
+    text-shadow: 3px 3px #000;
+    margin-top: 80px;
+    font-size: 1.5rem;
+    padding: 40px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 3px solid #000;
+}
+
+@media (max-width: 768px) {
+    .raised-slot {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .raised-slot img,
+    .raised-slot .no-image {
+        margin: 0 auto;
+    }
+
+    .raised-slot form,
+    .raised-slot a {
+        margin: 5px;
+        display: block;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .panel {
+        padding: 20px;
+        width: 95%;
+    }
+
+    .button {
+        font-size: 1.1rem;
+        padding: 12px 25px;
+    }
 }

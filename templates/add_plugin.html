@@ -1,27 +1,110 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <title>Home</title>
+        <title>Add Plugin</title>
+        <link
+            rel="stylesheet"
+            href="{{url_for('static', filename='css/minecraft.css')}}"
+        />
         <link
             rel="stylesheet"
             href="{{url_for('static', filename='css/add_plugin.css')}}"
         />
     </head>
     <body>
-        <h1>Add new plugin</h1>
-        <form method="POST" action="/add_plugin" enctype="multipart/form-data">
-            <label>Plugin name: </label>
-            <input placeholder="title" name="plugin_name" />
-            <label>Plugin description: </label>
-            <textarea placeholder="description" name="plugin_description">
-            </textarea>
-            <label>Plugin file: </label>
-            <input type="file" name="plugin_file" />
-            <label>Plugin image: </label>
-            <input type="file" name="plugin_image" />
+        <div class="panel">
+            <h1 class="text-shadow-md">Add new plugin</h1>
+            <form
+                method="POST"
+                action="/add_plugin"
+                enctype="multipart/form-data"
+            >
+                <div class="form-group">
+                    <label>Plugin name:</label>
+                    <input
+                        type="text"
+                        placeholder="Enter plugin name"
+                        name="plugin_name"
+                        required
+                    />
+                </div>
 
-            <button type="submit">Add</button>
-        </form>
-        <a href="/"><button class="cancel-btn">Cancel</button></a>
+                <div class="form-group">
+                    <label>Plugin description:</label>
+                    <textarea
+                        placeholder="Enter plugin description"
+                        name="plugin_description"
+                        required
+                    ></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Plugin file (.jar or .zip):</label>
+                    <input
+                        type="file"
+                        name="plugin_file"
+                        accept=".jar,.zip"
+                        required
+                    />
+                </div>
+
+                <div class="form-group">
+                    <label>Plugin image (optional):</label>
+                    <input
+                        type="file"
+                        name="plugin_image"
+                        accept="image/*"
+                        id="image_input"
+                    />
+                    <div class="image-preview" id="image_preview">
+                        <div class="placeholder">?</div>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="button">Add Plugin</button>
+                    <a href="/"
+                        ><button type="button" class="cancel-btn">
+                            Cancel
+                        </button></a
+                    >
+                </div>
+            </form>
+        </div>
+
+        <script>
+            const imageInput = document.getElementById("image_input");
+            const imagePreview = document.getElementById("image_preview");
+
+            if (imageInput) {
+                imageInput.addEventListener("change", function (e) {
+                    const file = e.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function (e) {
+                            const placeholder =
+                                imagePreview.querySelector(".placeholder");
+                            if (placeholder) {
+                                placeholder.remove();
+                            }
+                            let img = imagePreview.querySelector("img");
+                            if (!img) {
+                                img = document.createElement("img");
+                                img.alt = "Plugin preview";
+                                imagePreview.appendChild(img);
+                            }
+
+                            img.src = e.target.result;
+                            imagePreview.classList.add("has-image");
+                        };
+                        reader.readAsDataURL(file);
+                    } else {
+                        imagePreview.classList.remove("has-image");
+                        imagePreview.innerHTML =
+                            '<div class="placeholder">?</div>';
+                    }
+                });
+            }
+        </script>
     </body>
 </html>
