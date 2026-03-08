@@ -9,7 +9,18 @@ from werkzeug.utils import secure_filename
 from plugin import Plugin, db
 
 UPLOAD_FOLDER = "static/uploads/plugins"
-ALLOWED_EXTENSIONS = {"pdf", "png", "jpg", "jpeg", "jar", "java", "txt"}
+ALLOWED_EXTENSIONS = {
+    "pdf",
+    "png",
+    "jpg",
+    "jpeg",
+    "jar",
+    "java",
+    "txt",
+    "zip",
+    "rar",
+    "webp",
+}
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
