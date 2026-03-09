@@ -62,11 +62,10 @@
                         type="file"
                         name="plugin_image"
                         accept="image/*"
-                        id="image_input"
+                        class="image_input"
                     />
                     <div
                         class="image-preview {% if plugin.image_filename %}has-image{% endif %}"
-                        id="image_preview"
                     >
                         {% if plugin.image_filename %}
                         <img
@@ -96,8 +95,8 @@
         </div>
 
         <script>
-            const imageInput = document.getElementById("image_input");
-            const imagePreview = document.getElementById("image_preview");
+            const imageInput = document.getElementByClassName("image_input");
+            const imagePreview = document.getElementsByClassName('image_preview')[0];
 
             if (imageInput) {
                 imageInput.addEventListener("change", function (e) {
