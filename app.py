@@ -63,7 +63,7 @@ def home():
     return render_template("home.html", plugins=list_plugins())
 
 
-@app.route("/add_plugin", methods=["GET", "POST"])
+@app.route("/add-plugin", methods=["GET", "POST"])
 def add_plugin():
     if request.method == "POST":
         if "plugin_file" not in request.files:
@@ -116,7 +116,7 @@ def add_plugin():
         return render_template("add_plugin.html")
 
 
-@app.route("/edit_plugin/<int:plugin_id>", methods=["GET", "POST"])
+@app.route("/edit-plugin/<int:plugin_id>", methods=["GET", "POST"])
 def edit_plugin(plugin_id):
     plugin = load_plugin(plugin_id)
     if request.method == "GET":

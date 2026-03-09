@@ -16,7 +16,7 @@
             <h1 class="text-shadow-md">Edit plugin</h1>
             <form
                 method="POST"
-                action="/edit_plugin/{{ plugin.id }}"
+                action="/edit-plugin/{{ plugin.id }}"
                 enctype="multipart/form-data"
             >
                 <div class="form-group">
@@ -96,7 +96,8 @@
 
         <script>
             const imageInput = document.getElementByClassName("image_input");
-            const imagePreview = document.getElementsByClassName('image_preview')[0];
+            const imagePreview =
+                document.getElementByClassName("image_preview")[0];
 
             if (imageInput) {
                 imageInput.addEventListener("change", function (e) {

@@ -16,7 +16,7 @@
             <h1 class="text-shadow-md">Add new plugin</h1>
             <form
                 method="POST"
-                action="/add_plugin"
+                action="/add-plugin"
                 enctype="multipart/form-data"
             >
                 <div class="form-group">
@@ -54,9 +54,9 @@
                         type="file"
                         name="plugin_image"
                         accept="image/*"
-                        id="image_input"
+                        class="image_input"
                     />
-                    <div class="image-preview" id="image_preview">
+                    <div class="image-preview">
                         <div class="placeholder">?</div>
                     </div>
                 </div>
@@ -73,8 +73,9 @@
         </div>
 
         <script>
-            const imageInput = document.getElementById("image_input");
-            const imagePreview = document.getElementById("image_preview");
+            const imageInput = document.getElementByClassName("image_input");
+            const imagePreview =
+                document.getElementByClassName("image_preview");
 
             if (imageInput) {
                 imageInput.addEventListener("change", function (e) {
