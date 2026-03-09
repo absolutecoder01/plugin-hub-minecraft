@@ -17,6 +17,7 @@ dist/
 # Local data
 *.sqlite-journal
 static/uploads/
+instance/database.db
 
 # IDE
 .vscode/
